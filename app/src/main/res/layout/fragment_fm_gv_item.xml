@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@drawable/bg_card"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/fragment_fm_gv_item_img"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/test" />
+
+    <TextView
+        android:id="@+id/fragment_fm_gv_item_tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:maxEms="5"
+        android:maxLines="1"
+        android:text="930私家车"
+        android:textColor="@color/colorBlack"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/user" />
+
+        <TextView
+            android:id="@+id/fragment_fm_gv_item_tv_audience"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxEms="5"
+            android:maxLines="1"
+            android:text="收听：163543"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/fragment_fm_gv_con"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/sc_off" />
+    </LinearLayout>
+</LinearLayout>

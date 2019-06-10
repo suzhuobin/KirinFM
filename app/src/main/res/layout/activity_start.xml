@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.StartActivity">
+
+    <TextView
+        android:id="@+id/activity_start_tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/count_down"
+        android:gravity="center"
+        android:padding="20dp"
+        android:textColor="#FFFFFF"
+        android:textSize="100sp"
+        tools:text="10">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/activity_start_tv_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="100dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp"
+        tools:text="辛尼：好脾气宛如晴天，到处流放着光亮" />
+</FrameLayout>
