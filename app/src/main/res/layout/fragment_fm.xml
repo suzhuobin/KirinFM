@@ -12,6 +12,16 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/fragment_fm_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/search_view" />
+
         <LinearLayout
             android:id="@+id/fragment_fm_layou_tregion"
             android:layout_width="wrap_content"
@@ -30,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="北京"
+                android:text="广西"
                 android:textColor="#FF0000"
                 android:textSize="20sp" />
 
@@ -41,27 +51,12 @@
                 android:src="@drawable/sl" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/fragment_fm_search"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="3dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/search_view" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#D3D3D3" />
-
-    <com.youth.banner.Banner
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/fragment_fm_refresh"
