@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/sc_on" />
+            android:src="@drawable/have_already_collected" />
 
         <TextView
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:background="@drawable/no_collect" />
+                android:background="@drawable/there_is_no_collection" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="请在电台列表中进行收藏" />
+                android:text="请在电台列表中收藏" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

@@ -106,8 +106,8 @@ public class FindFragment extends BaseFragment {
         ivPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int res = playOrPause() ? R.drawable.music_pause :
-                        R.drawable.music_play;
+                int res = playOrPause() ? R.drawable.pause :
+                        R.drawable.play;
                 ivPause.setImageResource(res);
             }
         });

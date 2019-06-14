@@ -1,4 +1,4 @@
-package net.lzzy.kirinfm.analytical;
+package net.lzzy.kirinfm.service;
 
 import com.google.gson.Gson;
 

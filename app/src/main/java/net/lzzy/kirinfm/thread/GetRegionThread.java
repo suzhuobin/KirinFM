@@ -2,7 +2,7 @@ package net.lzzy.kirinfm.thread;
 
 import android.os.AsyncTask;
 
-import net.lzzy.kirinfm.analytical.AreaService;
+import net.lzzy.kirinfm.service.AreaService;
 import net.lzzy.kirinfm.models.Region;
 
 import java.io.IOException;

@@ -13,10 +13,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/program_information_lv_item_img_yin_bo"
+            android:id="@+id/program_information_lv_item_img_sound_wave"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:src="@drawable/yin_bo" />
+            android:src="@drawable/sound_wave" />
 
         <TextView
             android:id="@+id/program_information_lv_item_tv_title"
@@ -31,7 +31,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:src="@drawable/number" />
+            android:src="@drawable/users" />
 
         <TextView
             android:id="@+id/program_information_lv_item_tv_count"

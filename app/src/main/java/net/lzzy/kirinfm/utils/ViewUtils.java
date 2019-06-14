@@ -122,11 +122,11 @@ public class ViewUtils {
                 viewHolder.setTextView(R.id.program_information_lv_item_tv_title, playBill.getTitle());
                 viewHolder.setTextView(R.id.program_information_lv_item_tv_count, "0");
                 if (playBill.isPlayIng()) {
-                    viewHolder.setImageResource(R.id.program_information_lv_item_img_yin_bo, R.drawable.play_ing);
+                    viewHolder.setImageResource(R.id.program_information_lv_item_img_sound_wave, R.drawable.playing);
                     TextView tvTitle = viewHolder.getView(R.id.program_information_lv_item_tv_title);
-                    tvTitle.setTextColor(Color.parseColor("#1afa29"));
+                    tvTitle.setTextColor(Color.parseColor("#00FFFF"));
                 } else {
-                    viewHolder.setImageResource(R.id.program_information_lv_item_img_yin_bo, R.drawable.yin_bo);
+                    viewHolder.setImageResource(R.id.program_information_lv_item_img_sound_wave, R.drawable.sound_wave);
                     TextView tvTitle = viewHolder.getView(R.id.program_information_lv_item_tv_title);
                     tvTitle.setTextColor(Color.parseColor("#000000"));
                 }

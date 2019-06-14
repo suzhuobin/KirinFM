@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:src="@drawable/test" />
+        android:src="@drawable/icon" />
 
     <TextView
         android:id="@+id/fragment_fm_gv_item_tv_name"
@@ -53,6 +53,6 @@
             android:id="@+id/fragment_fm_gv_con"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/sc_off" />
+            android:src="@drawable/not_to_collect" />
     </LinearLayout>
 </LinearLayout>

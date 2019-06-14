@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 
-import net.lzzy.kirinfm.analytical.NetworkAddressService;
+import net.lzzy.kirinfm.service.NetworkAddressService;
 import net.lzzy.kirinfm.models.NetworkArea;
 
 import java.io.IOException;

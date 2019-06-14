@@ -2,7 +2,7 @@ package net.lzzy.kirinfm.thread;
 
 import android.os.AsyncTask;
 
-import net.lzzy.kirinfm.analytical.NetworkLocationService;
+import net.lzzy.kirinfm.service.NetworkLocationService;
 import net.lzzy.kirinfm.models.Radio;
 
 import java.lang.ref.WeakReference;

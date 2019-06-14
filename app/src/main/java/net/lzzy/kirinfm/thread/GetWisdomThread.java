@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 
-import net.lzzy.kirinfm.analytical.WisdomService;
+import net.lzzy.kirinfm.service.WisdomService;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;

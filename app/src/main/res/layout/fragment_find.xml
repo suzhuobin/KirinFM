@@ -34,7 +34,7 @@
         android:layout_height="350dp"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
-        android:background="@drawable/test" />
+        android:background="@drawable/icon" />
 
     <TextView
         android:id="@+id/fragment_find_tv_title"
@@ -101,7 +101,7 @@
                 android:id="@+id/fragment_find_iv_front"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/music_front" />
+                android:background="@drawable/last" />
 
             <ImageView
                 android:id="@+id/fragment_find_iv_pause"
@@ -109,14 +109,14 @@
                 android:layout_height="80dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/music_pause"
+                android:background="@drawable/pause"
                 android:clickable="true" />
 
             <ImageView
                 android:id="@+id/fragment_find_iv_queen"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/music_queen" />
+                android:background="@drawable/next" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

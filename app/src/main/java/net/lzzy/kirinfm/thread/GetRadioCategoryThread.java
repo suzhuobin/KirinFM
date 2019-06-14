@@ -2,7 +2,7 @@ package net.lzzy.kirinfm.thread;
 
 import android.os.AsyncTask;
 
-import net.lzzy.kirinfm.analytical.RadioAreaService;
+import net.lzzy.kirinfm.service.RadioAreaService;
 import net.lzzy.kirinfm.models.RadioCategory;
 
 import java.io.IOException;
