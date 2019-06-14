@@ -11,7 +11,7 @@
         android:background="#BBB7B7">
 
         <TextView
-            android:id="@+id/dialog_play_bill_tv_title"
+            android:id="@+id/radio_program_tv_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#8303D8F4"
@@ -21,7 +21,7 @@
             android:textSize="20sp" />
 
         <LinearLayout
-            android:id="@+id/dialog_play_bill_layout_back"
+            android:id="@+id/radio_program_layout_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -33,7 +33,7 @@
                 android:src="@drawable/back" />
 
             <TextView
-                android:id="@+id/dialog_play_bill_tv_back"
+                android:id="@+id/radio_program_tv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -45,11 +45,11 @@
     </FrameLayout>
 
     <ListView
-        android:id="@+id/dialog_play_bill_lv"
+        android:id="@+id/radio_program_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <include
-        android:id="@+id/dialog_play_bill_Empty"
+        android:id="@+id/radio_program_Empty"
         layout="@layout/no_network" />
 </LinearLayout>

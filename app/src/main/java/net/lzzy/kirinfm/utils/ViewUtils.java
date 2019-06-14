@@ -70,7 +70,14 @@ public class ViewUtils {
         public abstract boolean handleTouch(MotionEvent event);
     }
 
-    //判断位置
+    /**
+     * 判断位置
+     *
+     * @param targetView
+     * @param xAxis
+     * @param yAxis
+     * @return
+     */
     public static boolean isTouchPointInView(View targetView, int xAxis, int yAxis) {
         if (targetView == null) {
             return false;
@@ -98,38 +105,38 @@ public class ViewUtils {
     public static void showPlayBill(Context context, String back, String title, List<PlayBill> playBillList) {
         dialog = new FullScreenDialog(context);
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.diantailiebiao, null, false);
-        LinearLayout linearLayout = view.findViewById(R.id.dialog_play_bill_layout_back);
+                .inflate(R.layout.radio_program, null, false);
+        LinearLayout linearLayout = view.findViewById(R.id.radio_program_layout_back);
         linearLayout.setOnClickListener(v -> ViewUtils.dismissPlayBill());
-        TextView tvBack = view.findViewById(R.id.dialog_play_bill_tv_back);
+        TextView tvBack = view.findViewById(R.id.radio_program_tv_back);
         tvBack.setText(back);
-        TextView tvTitle = view.findViewById(R.id.dialog_play_bill_tv_title);
+        TextView tvTitle = view.findViewById(R.id.radio_program_tv_title);
         tvTitle.setText(title);
-        ListView listView = view.findViewById(R.id.dialog_play_bill_lv);
-        listView.setEmptyView(view.findViewById(R.id.dialog_play_bill_Empty));
+        ListView listView = view.findViewById(R.id.radio_program_lv);
+        listView.setEmptyView(view.findViewById(R.id.radio_program_Empty));
         playBills = playBillList;
         playBillAdapter = new GenericAdapter<PlayBill>(context,
-                R.layout.diantaijiemu, playBills) {
+                R.layout.program_information, playBills) {
             @Override
             public void populate(ViewHolder viewHolder, PlayBill playBill) {
-                viewHolder.setTextView(R.id.dialog_play_bill_lv_item_tv_title, playBill.getTitle());
-                viewHolder.setTextView(R.id.dialog_play_bill_lv_item_tv_count, "0");
+                viewHolder.setTextView(R.id.program_information_lv_item_tv_title, playBill.getTitle());
+                viewHolder.setTextView(R.id.program_information_lv_item_tv_count, "0");
                 if (playBill.isPlayIng()) {
-                    viewHolder.setImageResource(R.id.dialog_play_bill_lv_item_img_yin_bo, R.drawable.play_ing);
-                    TextView tvTitle = viewHolder.getView(R.id.dialog_play_bill_lv_item_tv_title);
+                    viewHolder.setImageResource(R.id.program_information_lv_item_img_yin_bo, R.drawable.play_ing);
+                    TextView tvTitle = viewHolder.getView(R.id.program_information_lv_item_tv_title);
                     tvTitle.setTextColor(Color.parseColor("#1afa29"));
                 } else {
-                    viewHolder.setImageResource(R.id.dialog_play_bill_lv_item_img_yin_bo, R.drawable.yin_bo);
-                    TextView tvTitle = viewHolder.getView(R.id.dialog_play_bill_lv_item_tv_title);
+                    viewHolder.setImageResource(R.id.program_information_lv_item_img_yin_bo, R.drawable.yin_bo);
+                    TextView tvTitle = viewHolder.getView(R.id.program_information_lv_item_tv_title);
                     tvTitle.setTextColor(Color.parseColor("#000000"));
                 }
                 String broadcasters = "";
                 for (Announcer broadcaster : playBill.getBroadcasters()) {
                     broadcasters = broadcasters.concat(broadcaster.getUsername()).concat("、");
                 }
-                viewHolder.setTextView(R.id.dialog_play_bill_lv_item_tv_broadcasters,
+                viewHolder.setTextView(R.id.program_information_lv_item_tv_broadcasters,
                         broadcasters.length() > 0 ? broadcasters.substring(0, broadcasters.length() - 1) : "");
-                viewHolder.setTextView(R.id.dialog_play_bill_lv_item_tv_time,
+                viewHolder.setTextView(R.id.program_information_lv_item_tv_time,
                         playBill.getStart_time() + "-" + playBill.getEnd_time());
             }
 

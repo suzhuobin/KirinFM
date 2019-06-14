@@ -208,13 +208,13 @@ public class AnalyzeFragment extends BaseFragment {
     }
 
     private void displayLineChart() {
-        ValueFormatter xFrmatter = new ValueFormatter() {
+        ValueFormatter xFormatter = new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
                 return "Q." + (int) value;
             }
         };
-        lineChart.getXAxis().setValueFormatter(xFrmatter);
+        lineChart.getXAxis().setValueFormatter(xFormatter);
         List<Entry> entries = new ArrayList<>();
 
         LineDataSet dataSet = new LineDataSet(entries, "");

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.FavoriteFragment">
+    tools:context=".fragments.CollectFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         android:layout_height="match_parent">
 
         <GridView
-            android:id="@+id/fragment_favorite_gv"
+            android:id="@+id/fragment_collect_gv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
@@ -46,7 +46,7 @@
             android:verticalSpacing="20dp" />
 
         <LinearLayout
-            android:id="@+id/fragment_favorite_none"
+            android:id="@+id/fragment_collect_none"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -61,13 +61,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text=" 你还没有收藏哦~" />
+                android:text="你还没有收藏任何电台" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="可以在电台列表中进行选择" />
+                android:text="请在电台列表中进行收藏" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

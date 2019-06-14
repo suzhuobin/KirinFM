@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @author Administrator
  */
-public class FavoriteFragment extends BaseFragment/* implements MainActivity.UpdateFragmentInterface */ {
+public class CollectFragment extends BaseFragment/* implements MainActivity.UpdateFragmentInterface */ {
 
     private GridView gv;
     private List<Radio> radios = CollectionFactory.getInstance().getFavoriteRadio();
@@ -35,15 +35,15 @@ public class FavoriteFragment extends BaseFragment/* implements MainActivity.Upd
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_favorite;
+        return R.layout.fragment_collect;
 
     }
 
     @Override
     protected void populate() {
-        gv = find(R.id.fragment_favorite_gv);
+        gv = find(R.id.fragment_collect_gv);
         //无数据视图
-        View empty = find(R.id.fragment_favorite_none);
+        View empty = find(R.id.fragment_collect_none);
         gv.setEmptyView(empty);
         adapter = new GenericAdapter<Radio>(getActivity(), R.layout.fragment_fm_gv_item, radios) {
             @Override

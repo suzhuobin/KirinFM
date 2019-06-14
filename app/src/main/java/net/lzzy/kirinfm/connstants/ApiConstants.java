@@ -63,11 +63,6 @@ public class ApiConstants {
     }
 
     /**
-     * 获取轮播广告
-     */
-    public static final String GET_ADVERTISING = "https://rapi.qingting.fm/recommendations/0/banner?more=false&replay=false";
-
-    /**
      * 直播地址
      */
     private static String GET_PLAY_URL_A = "http://lhttp.qingting.fm/live/";

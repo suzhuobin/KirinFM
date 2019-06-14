@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @author Administrator
  */
-public class StartActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
     //region
     /**
      * ExtraKey
@@ -100,10 +100,10 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_splash);
         AppUtils.addActivity(this);
-        time = findViewById(R.id.activity_start_tv_time);
-        hint = findViewById(R.id.activity_start_tv_hint);
+        time = findViewById(R.id.activity_splash_tv_time);
+        hint = findViewById(R.id.activity_splash_tv_hint);
         //判断网络是否可用
         if (!AppUtils.isNetworkAvailable()) {
             goToMain(this);
@@ -121,39 +121,39 @@ public class StartActivity extends AppCompatActivity {
         //倒计时
         AppUtils.getExecutor().execute(this::countDown);
         //获取名人名言
-        new GetWisdomThread<StartActivity>(StartActivity.this) {
+        new GetWisdomThread<SplashActivity>(SplashActivity.this) {
             @Override
-            protected void onPostExecute(String wisdom, StartActivity startActivity) {
-                startActivity.hint.setText(wisdom);
-                startActivity.getWisdom = true;
-                goToMain(startActivity);
+            protected void onPostExecute(String wisdom, SplashActivity splashActivity) {
+                splashActivity.hint.setText(wisdom);
+                splashActivity.getWisdom = true;
+                goToMain(splashActivity);
             }
         }.execute();
         //获取所有的地区
-        new GetRegionThread<StartActivity>(StartActivity.this) {
+        new GetRegionThread<SplashActivity>(SplashActivity.this) {
             @Override
-            protected void onPostExecute(List<Region> regions, StartActivity startActivity) {
-                startActivity.regions.addAll(regions);
-                startActivity.getRegion = true;
-                goToMain(startActivity);
+            protected void onPostExecute(List<Region> regions, SplashActivity splashActivity) {
+                splashActivity.regions.addAll(regions);
+                splashActivity.getRegion = true;
+                goToMain(splashActivity);
             }
         }.execute();
         //获取所有的电台类别
-        new GetRadioCategoryThread<StartActivity>(StartActivity.this) {
+        new GetRadioCategoryThread<SplashActivity>(SplashActivity.this) {
             @Override
-            protected void onPostExecute(List<RadioCategory> regions, StartActivity startActivity) {
-                startActivity.radioCategories.addAll(regions);
-                startActivity.getRadioCategory = true;
-                goToMain(startActivity);
+            protected void onPostExecute(List<RadioCategory> regions, SplashActivity splashActivity) {
+                splashActivity.radioCategories.addAll(regions);
+                splashActivity.getRadioCategory = true;
+                goToMain(splashActivity);
             }
         }.execute();
         //获取当前地区
-        new GetThisRegionThread<StartActivity>(StartActivity.this) {
+        new GetThisRegionThread<SplashActivity>(SplashActivity.this) {
             @Override
-            protected void onPostExecute(NetworkArea thisRegion, StartActivity startActivity) {
-                startActivity.thisRegion = thisRegion;
-                startActivity.getThisRegion = true;
-                goToMain(startActivity);
+            protected void onPostExecute(NetworkArea thisRegion, SplashActivity splashActivity) {
+                splashActivity.thisRegion = thisRegion;
+                splashActivity.getThisRegion = true;
+                goToMain(splashActivity);
             }
         }.execute();
     }
@@ -178,15 +178,15 @@ public class StartActivity extends AppCompatActivity {
 
     private MyHandler handler = new MyHandler(this);
 
-    private static class MyHandler extends AbstractStaticHandler<StartActivity> {
+    private static class MyHandler extends AbstractStaticHandler<SplashActivity> {
         Gson gson = new Gson();
 
-        MyHandler(StartActivity context) {
+        MyHandler(SplashActivity context) {
             super(context);
         }
 
         @Override
-        public void handleMessage(Message msg, StartActivity activity) {
+        public void handleMessage(Message msg, SplashActivity activity) {
             switch (msg.what) {
                 case WHAT_COUNT_ING:
                     //倒计时进行中
@@ -207,7 +207,7 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-    private static void goToMain(StartActivity activity) {
+    private static void goToMain(SplashActivity activity) {
         if (activity.getThisRegion && activity.getRadioCategory
                 && activity.getRegion && activity.getWisdom && activity.seconds <= 0) {
             Intent intent = new Intent(activity, MainActivity.class);

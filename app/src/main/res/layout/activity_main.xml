@@ -23,46 +23,23 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/activity_main_layout_favorite"
+            android:id="@+id/activity_main_layout_collect"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#999999"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/activity_main_img_favorite"
+                android:id="@+id/activity_main_img_collect"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/favorite_off" />
+                android:src="@drawable/ic_local_pressed" />
 
             <TextView
                 android:id="@+id/activity_main_tv_favorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="收藏夹"
-                android:textColor="#707070" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/activity_main_layout_fm"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/activity_main_img_fm"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/fm_off" />
-
-            <TextView
-                android:id="@+id/activity_main_tv_fm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -71,10 +48,36 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/activity_main_layout_fm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#999999"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/activity_main_img_fm"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_find_normal" />
+
+            <TextView
+                android:id="@+id/activity_main_tv_fm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="搜索"
+                android:textColor="#707070" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/activity_main_layout_analyze"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#999999"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -83,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/analyze_off" />
+                android:src="@drawable/ic_chart_normal" />
 
             <TextView
                 android:id="@+id/activity_main_tv_analyze"

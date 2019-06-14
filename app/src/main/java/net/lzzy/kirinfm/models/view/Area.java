@@ -33,5 +33,4 @@ public class Area {
     public void setData(List<Region> Data) {
         this.Data = Data;
     }
-
 }

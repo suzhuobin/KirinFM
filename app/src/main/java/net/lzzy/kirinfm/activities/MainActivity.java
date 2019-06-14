@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import net.lzzy.kirinfm.R;
 import net.lzzy.kirinfm.fragments.AnalyzeFragment;
-import net.lzzy.kirinfm.fragments.FavoriteFragment;
+import net.lzzy.kirinfm.fragments.CollectFragment;
 import net.lzzy.kirinfm.fragments.FmFragment;
 import net.lzzy.kirinfm.models.Radio;
 import net.lzzy.kirinfm.models.RadioCategory;
@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initData() {
-        radioCategories.addAll(getIntent().getParcelableArrayListExtra(StartActivity.EXTRA_ALL_RADIO_TYPE));
-        regions.addAll(getIntent().getParcelableArrayListExtra(StartActivity.EXTRA_ALL_REGION));
-        thisRegion = getIntent().getParcelableExtra(StartActivity.EXTRA_THIS_REGION);
+        radioCategories.addAll(getIntent().getParcelableArrayListExtra(SplashActivity.EXTRA_ALL_RADIO_TYPE));
+        regions.addAll(getIntent().getParcelableArrayListExtra(SplashActivity.EXTRA_ALL_REGION));
+        thisRegion = getIntent().getParcelableExtra(SplashActivity.EXTRA_THIS_REGION);
         adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public int getCount() {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     switch (position) {
                         case 0:
-                            fragment = new FavoriteFragment();
+                            fragment = new CollectFragment();
                             fragmentArray.append(position, fragment);
                             break;
                         case 1:
@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Fragment fragment = fragmentArray.get(position);
                 if (fragment instanceof FmFragment) {
                     ((FmFragment) fragment).updateFavorite();
-                } else if (fragment instanceof FavoriteFragment) {
-                    ((FavoriteFragment) fragment).updateFavorite();
+                } else if (fragment instanceof CollectFragment) {
+                    ((CollectFragment) fragment).updateFavorite();
                 }
             }
 
@@ -118,10 +118,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        findViewById(R.id.activity_main_layout_favorite).setOnClickListener(this);
+        findViewById(R.id.activity_main_layout_collect).setOnClickListener(this);
         findViewById(R.id.activity_main_layout_fm).setOnClickListener(this);
         findViewById(R.id.activity_main_layout_analyze).setOnClickListener(this);
-        favoriteImg = findViewById(R.id.activity_main_img_favorite);
+        favoriteImg = findViewById(R.id.activity_main_img_collect);
         fmImg = findViewById(R.id.activity_main_img_fm);
         analyzeImg = findViewById(R.id.activity_main_img_analyze);
         favoriteTv = findViewById(R.id.activity_main_tv_favorite);
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.activity_main_layout_favorite:
+            case R.id.activity_main_layout_collect:
                 cutTag(v.getId());
                 break;
             case R.id.activity_main_layout_fm:
@@ -156,25 +156,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
 
     private void cutTag(int tadId) {
-        favoriteImg.setImageResource(R.drawable.favorite_off);
+        favoriteImg.setImageResource(R.drawable.ic_local_normal);
         favoriteTv.setTextColor(Color.parseColor("#707070"));
-        fmImg.setImageResource(R.drawable.fm_off);
+        fmImg.setImageResource(R.drawable.ic_find_normal);
         fmTv.setTextColor(Color.parseColor("#707070"));
-        analyzeImg.setImageResource(R.drawable.analyze_off);
+        analyzeImg.setImageResource(R.drawable.ic_chart_normal);
         analyzeTv.setTextColor(Color.parseColor("#707070"));
         switch (tadId) {
             case R.id.activity_main_layout_analyze:
-                analyzeImg.setImageResource(R.drawable.analyze_on);
+                analyzeImg.setImageResource(R.drawable.ic_chart_pressed);
                 analyzeTv.setTextColor(Color.parseColor("#1295DA"));
                 pager.setCurrentItem(2);
                 break;
-            case R.id.activity_main_layout_favorite:
-                favoriteImg.setImageResource(R.drawable.favorite_on);
+            case R.id.activity_main_layout_collect:
+                favoriteImg.setImageResource(R.drawable.ic_local_pressed);
                 favoriteTv.setTextColor(Color.parseColor("#1295DA"));
                 pager.setCurrentItem(0);
                 break;
             case R.id.activity_main_layout_fm:
-                fmImg.setImageResource(R.drawable.fm_on);
+                fmImg.setImageResource(R.drawable.ic_find_pressed);
                 fmTv.setTextColor(Color.parseColor("#1295DA"));
                 pager.setCurrentItem(1);
                 break;
@@ -186,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //endregion
 
     //region
-
     /**
      * 销毁Activity
      */

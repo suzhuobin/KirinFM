@@ -135,7 +135,6 @@
                 android:layout_height="10dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/dot_style" />
-
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

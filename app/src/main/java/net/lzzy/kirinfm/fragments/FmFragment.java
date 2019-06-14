@@ -56,7 +56,6 @@ import java.util.List;
  * @author Administrator
  */
 public class FmFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
-
     public static final String ARG_REGIONS = "arg_regions";
     public static final String ARG_THIS_REGION = "arg_thisRegion";
     public static final String ARG_RADIO_CATEGORIES = "arg_radio_Categories";
@@ -210,17 +209,7 @@ public class FmFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                         if (region.getTitle().equals(regionText)) {
                             tvRegion.setText(regionText);
                             tvRegion.setTag(region.getId());
-                            getThisRegionRadio(region.getId(), 1, 12, true);
-                            /*new GetThisRegionRadioThread<FmFragment>(FmFragment.this,
-                                    region.getId(), 1, 12) {
-                                @Override
-                                protected void onPostExecute(List<Radio> radios, FmFragment fmFragment) {
-                                    fmFragment.thisRadioSize =radios.size();
-                                    fmFragment.radios.clear();
-                                    fmFragment.radios.addAll(radios);
-                                    fmFragment.gvAdaper.notifyDataSetChanged();
-                                }
-                            }.execute();*/
+                            getThisRegionRadio(region.getId(), 1, 15, true);
                         }
                     }
                     dialog.dismiss();
@@ -228,15 +217,7 @@ public class FmFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             });
             builder.show();
         });
-        /*new GetThisRegionRadioThread<FmFragment>(FmFragment.this,
-                (Integer) tvRegion.getTag(), 1, 12) {
-            @Override
-            protected void onPostExecute(List<Radio> radios, FmFragment fmFragment) {
-                fmFragment.thisRadioSize =radios.size();
-                fmFragment.gvAdaper.addAll(radios);
-            }
-        }.execute();*/
-        getThisRegionRadio((Integer) tvRegion.getTag(), 1, 12, false);
+        getThisRegionRadio((Integer) tvRegion.getTag(), 1, 15, false);
         gv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -245,27 +226,24 @@ public class FmFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                     if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
                         View v = (View) view.getChildAt(view.getChildCount() - 1);
                         int[] location = new int[2];
-                        v.getLocationOnScreen(location);//获取在整个屏幕内的绝对坐标
+                        /**
+                         * 获取在整个屏幕内的绝对坐标
+                         */
+                        v.getLocationOnScreen(location);
                         int y = location[1];
-
-                        if (view.getLastVisiblePosition() != getLastVisiblePosition && lastVisiblePositionY != y)//第一次拖至底部
-                        {
-                            //Toast.makeText(view.getContext(), "已经拖动至底部，再次拖动即可翻页", Toast.LENGTH_SHORT).show();
+                        if (view.getLastVisiblePosition() != getLastVisiblePosition && lastVisiblePositionY != y) {
                             getLastVisiblePosition = view.getLastVisiblePosition();
                             lastVisiblePositionY = y;
                             return;
-                        } else if (view.getLastVisiblePosition() == getLastVisiblePosition && lastVisiblePositionY == y)//第二次拖至底部
-                        {
+                        } else if (view.getLastVisiblePosition() == getLastVisiblePosition && lastVisiblePositionY == y) {
                             if (thisPag < pag) {
                                 thisPag++;
-                                getThisRegionRadio((int) tvRegion.getTag(), thisPag, 12, false);
+                                getThisRegionRadio((int) tvRegion.getTag(), thisPag, 15, false);
                             } else {
                                 Toast.makeText(view.getContext(), "已经加载所有电台", Toast.LENGTH_SHORT).show();
                             }
-
                         }
                     }
-
                     //未滚动到底部，第二次拖至底部都初始化
                     getLastVisiblePosition = 0;
                     lastVisiblePositionY = 0;
@@ -306,7 +284,7 @@ public class FmFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
 
     @Override
     public void onRefresh() {
-        getThisRegionRadio((Integer) tvRegion.getTag(), 1, 12, true);
+        getThisRegionRadio((Integer) tvRegion.getTag(), 1, 15, true);
     }
 
     private static class MyHandler extends AbstractStaticHandler<FmFragment> {
@@ -322,7 +300,7 @@ public class FmFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 case WHAT_GET_THIS_REGION_RADIO_OK:
                     Pair<String, Boolean> pair = (Pair<String, Boolean>) msg.obj;
                     RadioIntroduction radioJSON = gson.fromJson(pair.first, RadioIntroduction.class);
-                    float i = (float) radioJSON.getData().getTotal() / 12;
+                    float i = (float) radioJSON.getData().getTotal() / 15;
                     fmFragment.pag = (int) Math.ceil(i);
                     if (pair.second) {
                         fmFragment.gvAdaper.clear();

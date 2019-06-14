@@ -13,10 +13,6 @@ public class RequestDataService {
         return json;
     }
 
-    public static String getAdvertising() throws IOException {
-        return ApiService.okGet(ApiConstants.GET_ADVERTISING);
-    }
-
     public static String getRadioPlayBill(int contentId, String day) throws IOException {
         return ApiService.okGet(ApiConstants.getRadioPlayBill(contentId, day));
     }
