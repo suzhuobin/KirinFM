@@ -6,11 +6,45 @@
     android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
-    <net.lzzy.kirinfm.utils.StaticViewPager
-        android:id="@+id/activity_main_pager"
+    <FrameLayout
+        android:id="@+id/activity_main_play_icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+    </FrameLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <net.lzzy.kirinfm.utils.StaticViewPager
+            android:id="@+id/activity_main_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp">
+
+            <net.lzzy.kirinfm.fragments.CircleImageView
+                android:id="@+id/activity_main_show_playing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/now_playing" />
+
+            <ImageView
+                android:id="@+id/activity_main_show_now_playing"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/now_playing" />
+        </FrameLayout>
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"
