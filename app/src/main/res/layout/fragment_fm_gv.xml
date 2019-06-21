@@ -8,7 +8,7 @@
     android:padding="5dp">
 
     <ImageView
-        android:id="@+id/fragment_fm_gv_item_img"
+        android:id="@+id/fragment_collect_item_img"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

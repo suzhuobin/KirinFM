@@ -45,10 +45,10 @@ public class CollectFragment extends BaseFragment/* implements MainActivity.Upda
         //无数据视图
         View empty = find(R.id.fragment_collect_none);
         gv.setEmptyView(empty);
-        adapter = new GenericAdapter<Radio>(getActivity(), R.layout.fragment_fm_gv_item, radios) {
+        adapter = new GenericAdapter<Radio>(getActivity(), R.layout.fragment_fm_gv, radios) {
             @Override
             public void populate(ViewHolder viewHolder, Radio radio) {
-                ImageView imageView = viewHolder.getView(R.id.fragment_fm_gv_item_img);
+                ImageView imageView = viewHolder.getView(R.id.fragment_collect_item_img);
                 Picasso.get().load(radio.getCover())
                         .into(imageView);
                 viewHolder.setTextView(R.id.fragment_fm_gv_item_tv_name, radio.getTitle());

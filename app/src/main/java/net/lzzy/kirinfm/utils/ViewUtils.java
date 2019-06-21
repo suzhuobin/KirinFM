@@ -119,24 +119,24 @@ public class ViewUtils {
                 R.layout.program_information, playBills) {
             @Override
             public void populate(ViewHolder viewHolder, PlayBill playBill) {
-                viewHolder.setTextView(R.id.program_information_lv_item_tv_title, playBill.getTitle());
+                viewHolder.setTextView(R.id.program_information_tv_title, playBill.getTitle());
                 viewHolder.setTextView(R.id.program_information_lv_item_tv_count, "0");
                 if (playBill.isPlayIng()) {
                     viewHolder.setImageResource(R.id.program_information_lv_item_img_sound_wave, R.drawable.playing);
-                    TextView tvTitle = viewHolder.getView(R.id.program_information_lv_item_tv_title);
+                    TextView tvTitle = viewHolder.getView(R.id.program_information_tv_title);
                     tvTitle.setTextColor(Color.parseColor("#00FFFF"));
                 } else {
                     viewHolder.setImageResource(R.id.program_information_lv_item_img_sound_wave, R.drawable.sound_wave);
-                    TextView tvTitle = viewHolder.getView(R.id.program_information_lv_item_tv_title);
+                    TextView tvTitle = viewHolder.getView(R.id.program_information_tv_title);
                     tvTitle.setTextColor(Color.parseColor("#000000"));
                 }
                 String broadcasters = "";
                 for (Announcer broadcaster : playBill.getBroadcasters()) {
                     broadcasters = broadcasters.concat(broadcaster.getUsername()).concat("、");
                 }
-                viewHolder.setTextView(R.id.program_information_lv_item_tv_broadcasters,
+                viewHolder.setTextView(R.id.program_information_tv_broadcasters,
                         broadcasters.length() > 0 ? broadcasters.substring(0, broadcasters.length() - 1) : "");
-                viewHolder.setTextView(R.id.program_information_lv_item_tv_time,
+                viewHolder.setTextView(R.id.program_information_tv_time,
                         playBill.getStart_time() + "-" + playBill.getEnd_time());
             }
 

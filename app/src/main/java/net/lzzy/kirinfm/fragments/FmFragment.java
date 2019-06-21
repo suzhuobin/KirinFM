@@ -24,10 +24,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-import com.youth.banner.listener.OnBannerListener;
 
 import net.lzzy.kirinfm.R;
 import net.lzzy.kirinfm.thread.GetNetworkAreaThread;
@@ -41,7 +37,6 @@ import net.lzzy.kirinfm.models.view.RadioIntroduction;
 import net.lzzy.kirinfm.network.ApiService;
 import net.lzzy.kirinfm.utils.AbstractStaticHandler;
 import net.lzzy.kirinfm.utils.AppUtils;
-import net.lzzy.kirinfm.utils.GlideImageLoader;
 import net.lzzy.kirinfm.utils.ViewUtils;
 import net.lzzy.sqllib.GenericAdapter;
 import net.lzzy.sqllib.ViewHolder;
@@ -117,7 +112,7 @@ public class FmFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         refresh = find(R.id.fragment_fm_refresh);
         refresh.setOnRefreshListener(this);
         tvRegion = find(R.id.fragment_fm_tv_region);
-        region_layout = find(R.id.fragment_fm_layou_tregion);
+        region_layout = find(R.id.fragment_fm_layout_region);
         search = find(R.id.fragment_fm_search);
         gv = find(R.id.fragment_fm_gv);
         //无数据视图
@@ -138,10 +133,10 @@ public class FmFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 tvRegion.setTag(region.getId());
             }
         }
-        gvAdaper = new GenericAdapter<Radio>(getContext(), R.layout.fragment_fm_gv_item, radios) {
+        gvAdaper = new GenericAdapter<Radio>(getContext(), R.layout.fragment_fm_gv, radios) {
             @Override
             public void populate(ViewHolder viewHolder, Radio radio) {
-                ImageView imageView = viewHolder.getView(R.id.fragment_fm_gv_item_img);
+                ImageView imageView = viewHolder.getView(R.id.fragment_collect_item_img);
                 Picasso.get().load(radio.getCover())
                         .into(imageView);
                 viewHolder.setTextView(R.id.fragment_fm_gv_item_tv_name, radio.getTitle());

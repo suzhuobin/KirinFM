@@ -7,61 +7,91 @@
     tools:context=".fragments.FmFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="46dp"
+        android:layout_gravity="center"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/fragment_fm_search"
+        <net.lzzy.kirinfm.fragments.HorizontalListView
+            android:id="@+id/fragment_fm_horizontal_lv"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="3dp"
+            android:layout_height="30dp"
+            android:layout_weight="1">
+
+        </net.lzzy.kirinfm.fragments.HorizontalListView>
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/search_view" />
+            android:background="@drawable/more_types" />
 
         <LinearLayout
-            android:id="@+id/fragment_fm_layou_tregion"
+            android:id="@+id/fragment_fm_layout_region"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_height="30dp"
                 android:layout_margin="5dp"
                 android:src="@drawable/location" />
 
             <TextView
                 android:id="@+id/fragment_fm_tv_region"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_margin="5dp"
-                android:text="广西"
+                android:text="北京"
                 android:textColor="#FF0000"
                 android:textSize="20sp" />
 
-            <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
-                android:layout_margin="5dp"
-                android:src="@drawable/below" />
+            <View
+                android:layout_width="1sp"
+                android:layout_height="20dp"
+                android:background="#918F8F" />
         </LinearLayout>
 
     </LinearLayout>
 
-    <View
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#D3D3D3" />
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/fragment_fm_search"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dp"
+            android:layout_marginLeft="10dp"
+
+            android:layout_weight="1"
+            android:background="@drawable/search_view" />
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/history" />
+    </LinearLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/fragment_fm_refresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="4">
 
         <GridView
@@ -74,7 +104,15 @@
             android:verticalSpacing="20dp">
 
         </GridView>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/fragment_practices_tv_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/fragment_practices_synchronized" />
 
     <include
         android:id="@+id/no_network"
