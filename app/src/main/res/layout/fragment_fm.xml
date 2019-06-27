@@ -25,7 +25,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/more_types" />
+            android:background="@drawable/below" />
 
         <LinearLayout
             android:id="@+id/fragment_fm_layout_region"
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
-                android:text="北京"
+                android:text="广西"
                 android:textColor="#FF0000"
                 android:textSize="20sp" />
 
@@ -54,9 +54,7 @@
                 android:layout_height="20dp"
                 android:background="#918F8F" />
         </LinearLayout>
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -117,5 +115,4 @@
     <include
         android:id="@+id/no_network"
         layout="@layout/no_network" />
-
 </LinearLayout>

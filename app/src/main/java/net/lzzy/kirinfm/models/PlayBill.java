@@ -1,11 +1,14 @@
 package net.lzzy.kirinfm.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * @author Administrator
  */
-public class PlayBill {
+public class PlayBill implements Parcelable {
     /**
      * id : 258312
      * start_time : 00:00:00
@@ -18,11 +21,35 @@ public class PlayBill {
      * title : 每夜唱不停
      * broadcasters : [{"id":23767,"username":"950MusicRadio","thumb":"http://tp4.sinaimg.cn/1723167603/180/40021850714/1","weibo_name":"950MusicRadio","weibo_id":"1723167603"}]
      */
-
     private int id;
     private String start_time;
     private String end_time;
     private boolean playIng;
+
+    protected PlayBill(Parcel in) {
+        id = in.readInt();
+        start_time = in.readString();
+        end_time = in.readString();
+        playIng = in.readByte() != 0;
+        duration = in.readInt();
+        res_id = in.readInt();
+        day = in.readInt();
+        channel_id = in.readInt();
+        program_id = in.readInt();
+        title = in.readString();
+    }
+
+    public static final Creator<PlayBill> CREATOR = new Creator<PlayBill>() {
+        @Override
+        public PlayBill createFromParcel(Parcel in) {
+            return new PlayBill(in);
+        }
+
+        @Override
+        public PlayBill[] newArray(int size) {
+            return new PlayBill[size];
+        }
+    };
 
     public boolean isPlayIng() {
         return playIng;
@@ -38,7 +65,7 @@ public class PlayBill {
     private int channel_id;
     private int program_id;
     private String title;
-    private List<Announcer> broadcasters;
+    private List<Announcer> announcers;
 
     public int getId() {
         return id;
@@ -113,12 +140,30 @@ public class PlayBill {
     }
 
     public List<Announcer> getBroadcasters() {
-        return broadcasters;
+        return announcers;
     }
 
-    public void setBroadcasters(List<Announcer> broadcasters) {
-        this.broadcasters = broadcasters;
+    public void setAnnouncers(List<Announcer> announcers) {
+        this.announcers = announcers;
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(start_time);
+        dest.writeString(end_time);
+        dest.writeByte((byte) (playIng ? 1 : 0));
+        dest.writeInt(duration);
+        dest.writeInt(res_id);
+        dest.writeInt(day);
+        dest.writeInt(channel_id);
+        dest.writeInt(program_id);
+        dest.writeString(title);
+    }
 }

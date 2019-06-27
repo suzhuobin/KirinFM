@@ -6,7 +6,7 @@
     android:padding="5dp">
 
     <ImageView
-        android:id="@+id/fragment_collect_item_img"
+        android:id="@+id/fragment_favorite_gv_item_img"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/play" />
@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/fragment_collect_item_tv_name"
+            android:id="@+id/fragment_favorite_item_tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="970女主播"
@@ -27,7 +27,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/fragment_collect_item_description"
+            android:id="@+id/fragment_favorite_item_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -42,10 +42,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/fragment_collect_item_category"
+                android:id="@+id/fragment_favorite_item_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="音乐类"
+                android:text="音乐台"
                 android:textSize="12sp" />
 
             <View
@@ -59,7 +59,7 @@
                 android:src="@drawable/play" />
 
             <TextView
-                android:id="@+id/fragment_collect_item_tv_audience"
+                android:id="@+id/fragment_favorite_item_tv_audience"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"

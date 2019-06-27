@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.CollectFragment">
+    tools:context=".fragments.FavoriteFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/have_already_collected" />
+            android:src="@drawable/pentagram" />
 
         <TextView
             android:layout_width="match_parent"
@@ -36,17 +36,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <GridView
-            android:id="@+id/fragment_collect_gv"
+        <ListView
+            android:id="@+id/fragment_favorite_gv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:horizontalSpacing="10dp"
-            android:numColumns="3"
-            android:verticalSpacing="20dp" />
+            android:numColumns="3" />
 
         <LinearLayout
-            android:id="@+id/fragment_collect_none"
+            android:id="@+id/fragment_favorite_none"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -55,19 +52,19 @@
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:background="@drawable/there_is_no_collection" />
+                android:background="@drawable/no_collection" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="你还没有收藏任何电台" />
+                android:text=" 你还没有收藏哦~" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="请在电台列表中收藏" />
+                android:text="可以在电台列表中进行选择" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

@@ -102,8 +102,8 @@ public class SplashActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
         AppUtils.addActivity(this);
-        time = findViewById(R.id.activity_splash_tv_time);
-        hint = findViewById(R.id.activity_splash_tv_hint);
+        time = findViewById(R.id.activity_start_tv_time);
+        hint = findViewById(R.id.activity_start_tv_hint);
         //判断网络是否可用
         if (!AppUtils.isNetworkAvailable()) {
             goToMain(this);

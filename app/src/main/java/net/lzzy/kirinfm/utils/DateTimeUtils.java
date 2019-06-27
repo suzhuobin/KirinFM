@@ -10,10 +10,8 @@ import java.util.Locale;
  * @author Administrator
  */
 public class DateTimeUtils {
-
     public static final SimpleDateFormat DATE_TIME_DEMAND =
             new SimpleDateFormat("yyyyMMdd", Locale.CANADA);
-
     public static final SimpleDateFormat DATE_TIME_FORMAT =
             new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CANADA);
     public static final SimpleDateFormat DATE_FORMAT =
@@ -27,6 +25,13 @@ public class DateTimeUtils {
         long thisDate = System.currentTimeMillis();
         long endDate = DATE_TIME_FORMAT.parse(date + " " + endTime).getTime();
         return thisDate > startDate && thisDate < endDate;
+    }
+
+    public static boolean playIf(String startTime) throws ParseException {
+        String date = DATE_FORMAT.format(new Date());
+        long thisDate = System.currentTimeMillis();
+        long startDate = DATE_TIME_FORMAT.parse(date + " " + startTime).getTime();
+        return thisDate >= startDate;
     }
 
     public static String getDay(Date today) {

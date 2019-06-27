@@ -31,12 +31,6 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp">
 
-            <net.lzzy.kirinfm.fragments.CircleImageView
-                android:id="@+id/activity_main_show_playing"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/now_playing" />
-
             <ImageView
                 android:id="@+id/activity_main_show_now_playing"
                 android:layout_width="60dp"

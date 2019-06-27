@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +17,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import net.lzzy.kirinfm.R;
 import net.lzzy.kirinfm.fragments.AnalyzeFragment;
-import net.lzzy.kirinfm.fragments.CollectFragment;
+import net.lzzy.kirinfm.fragments.FavoriteFragment;
+import net.lzzy.kirinfm.fragments.FindFragment;
 import net.lzzy.kirinfm.fragments.FmFragment;
 import net.lzzy.kirinfm.models.Radio;
 import net.lzzy.kirinfm.models.RadioCategory;
@@ -24,6 +26,7 @@ import net.lzzy.kirinfm.models.Region;
 import net.lzzy.kirinfm.models.NetworkArea;
 import net.lzzy.kirinfm.utils.AppUtils;
 import net.lzzy.kirinfm.utils.StaticViewPager;
+import net.lzzy.kirinfm.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +44,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<Region> regions = new ArrayList<>();
     private Radio radios;
     private List<RadioCategory> radioCategories = new ArrayList<>();
-    private NetworkArea thisRegion;
+    private NetworkArea networkArea;
     private SparseArray<Fragment> fragmentArray = new SparseArray<>();
     private StaticViewPager pager;
     private FragmentPagerAdapter adapter;
+    private static FrameLayout playContainer;
+    private static FindFragment playFragment = null;
+    private static ImageView plays;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initData() {
         radioCategories.addAll(getIntent().getParcelableArrayListExtra(SplashActivity.EXTRA_ALL_RADIO_TYPE));
         regions.addAll(getIntent().getParcelableArrayListExtra(SplashActivity.EXTRA_ALL_REGION));
-        thisRegion = getIntent().getParcelableExtra(SplashActivity.EXTRA_THIS_REGION);
+        networkArea = getIntent().getParcelableExtra(SplashActivity.EXTRA_THIS_REGION);
         adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public int getCount() {
@@ -74,11 +80,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     switch (position) {
                         case 0:
-                            fragment = new CollectFragment();
+                            fragment = new FavoriteFragment();
                             fragmentArray.append(position, fragment);
                             break;
                         case 1:
-                            fragment = FmFragment.newInstance(regions, radioCategories, thisRegion);
+                            fragment = FmFragment.newInstance(regions, radioCategories, networkArea);
                             fragmentArray.append(position, fragment);
                             break;
                         case 2:
@@ -99,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Fragment fragment = fragmentArray.get(position);
                 if (fragment instanceof FmFragment) {
                     ((FmFragment) fragment).updateFavorite();
-                } else if (fragment instanceof CollectFragment) {
-                    ((CollectFragment) fragment).updateFavorite();
+                } else if (fragment instanceof FavoriteFragment) {
+                    ((FavoriteFragment) fragment).updateFavorite();
                 }
             }
 
@@ -117,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cutTag(R.id.activity_main_layout_fm);
     }
 
+    //region 加载布局
+
+    //endregion
     private void initView() {
         findViewById(R.id.activity_main_layout_collect).setOnClickListener(this);
         findViewById(R.id.activity_main_layout_fm).setOnClickListener(this);
@@ -128,6 +137,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fmTv = findViewById(R.id.activity_main_tv_fm);
         analyzeTv = findViewById(R.id.activity_main_tv_analyze);
         pager = findViewById(R.id.activity_main_pager);
+        playContainer = findViewById(R.id.activity_main_play_icon);
+        plays = findViewById(R.id.activity_main_show_now_playing);
+    }
+
+    public void showPlay(FindFragment findFragment) {
+        playContainer.setVisibility(View.VISIBLE);
+        playFragment = findFragment;
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_play_icon,
+                findFragment).commit();
+    }
+
+    public static void showPlayHint() {
+        plays.setVisibility(View.VISIBLE);
+
+    }
+
+    public static void dismissPlay() {
+        playContainer.setVisibility(View.GONE);
+        if (ViewUtils.isShowing()) {
+            plays.setVisibility(View.VISIBLE);
+        } else {
+            plays.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -147,16 +179,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //region
-
-    /**
-     * 切换菜单方法
-     *
-     * @param tadId
-     */
+    //region 切换菜单方法
 
     private void cutTag(int tadId) {
-        favoriteImg.setImageResource(R.drawable.ic_local_normal);
+        favoriteImg.setImageResource(R.drawable.ic_local_pressed);
         favoriteTv.setTextColor(Color.parseColor("#707070"));
         fmImg.setImageResource(R.drawable.ic_find_normal);
         fmTv.setTextColor(Color.parseColor("#707070"));
@@ -185,11 +211,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     //endregion
 
-    //region
 
-    /**
-     * 销毁Activity
-     */
+    //region 销毁Activity
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -208,4 +231,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AppUtils.setStopped(getLocalClassName());
     }
     //endregion
+
+
+    @Override
+    public void onBackPressed() {
+        if (playContainer.isShown()) {
+            dismissPlay();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

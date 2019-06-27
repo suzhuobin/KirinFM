@@ -9,15 +9,32 @@ import net.lzzy.sqllib.Sqlitable;
  * @date 2019/4/16
  * Description:
  */
-public class Collection implements Sqlitable {
-
+public class Favorite implements Sqlitable {
     @Ignored
-    public static final String COL_RADIO_ID = "radioId";
+    public static final String COL_RADIO_ID="radioId";
     @AsPrimaryKey
     private int radioId;
     private String title;
     private long audience_count;
     private String cover;
+    private String description;
+    private String categories;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
 
     public int getRadioId() {
         return radioId;

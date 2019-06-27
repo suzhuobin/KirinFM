@@ -6,7 +6,7 @@
     tools:context=".activities.SplashActivity">
 
     <TextView
-        android:id="@+id/activity_splash_tv_time"
+        android:id="@+id/activity_start_tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -20,7 +20,7 @@
     </TextView>
 
     <TextView
-        android:id="@+id/activity_splash_tv_hint"
+        android:id="@+id/activity_start_tv_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -30,5 +30,5 @@
         android:maxLines="2"
         android:textColor="@color/colorBlack"
         android:textSize="25sp"
-        tools:text="辛尼：好脾气宛如晴天，到处流放着光亮" />
+        tools:text="名人名言" />
 </FrameLayout>

@@ -6,29 +6,60 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 
 import net.lzzy.kirinfm.R;
+import net.lzzy.kirinfm.activities.MainActivity;
+import net.lzzy.kirinfm.connstants.ApiConstants;
+import net.lzzy.kirinfm.fragments.FindFragment;
 import net.lzzy.kirinfm.models.Announcer;
 import net.lzzy.kirinfm.models.PlayBill;
+import net.lzzy.kirinfm.models.Radio;
 import net.lzzy.sqllib.GenericAdapter;
 import net.lzzy.sqllib.ViewHolder;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Administrator
  */
 public class ViewUtils {
-
-
     private static FullScreenDialog dialog;
     private static GenericAdapter<PlayBill> playBillAdapter;
-    private static List<PlayBill> playBills;
+    private static List<PlayBill> playBills = new ArrayList<>();
+    private static List<String> urls = new ArrayList<>();
+    private static Radio radioHints;
+
+    public static abstract class AbstractQueryHandlerRadio implements SearchView.OnQueryTextListener {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            handleQuery(query);
+            return true;
+
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            return false;
+        }
+
+        /**
+         * handle query logic
+         *
+         * @param kw keyword
+         * @return end query
+         */
+        public abstract void handleQuery(String kw);
+    }
 
     public static abstract class AbstractQueryHandler implements SearchView.OnQueryTextListener {
 
@@ -51,7 +82,6 @@ public class ViewUtils {
          */
         public abstract void handleQuery(String kw);
     }
-
 
     public static abstract class AbstractTouchHandler implements View.OnTouchListener {
 
@@ -102,41 +132,40 @@ public class ViewUtils {
         return (int) (dpValue * scale + 0.5f);
     }
 
-    public static void showPlayBill(Context context, String back, String title, List<PlayBill> playBillList) {
+    public static void showPlayBill(Context context, String back, String title,
+                                    List<PlayBill> playBillList, Radio radioHint) {
+        radioHints = radioHint;
         dialog = new FullScreenDialog(context);
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.radio_program, null, false);
-        LinearLayout linearLayout = view.findViewById(R.id.radio_program_layout_back);
+                .inflate(R.layout.dialog_play_bill, null, false);
+        LinearLayout linearLayout = view.findViewById(R.id.dialog_play_bill_layout_back);
         linearLayout.setOnClickListener(v -> ViewUtils.dismissPlayBill());
-        TextView tvBack = view.findViewById(R.id.radio_program_tv_back);
+        TextView tvBack = view.findViewById(R.id.dialog_play_bill_tv_back);
         tvBack.setText(back);
-        TextView tvTitle = view.findViewById(R.id.radio_program_tv_title);
+        TextView tvTitle = view.findViewById(R.id.dialog_play_bill_tv_title);
         tvTitle.setText(title);
-        ListView listView = view.findViewById(R.id.radio_program_lv);
-        listView.setEmptyView(view.findViewById(R.id.radio_program_Empty));
-        playBills = playBillList;
+        ListView listView = view.findViewById(R.id.dialog_play_bill_lv);
+        listView.setEmptyView(view.findViewById(R.id.dialog_play_bill_Empty));
+        updateData(playBillList);
         playBillAdapter = new GenericAdapter<PlayBill>(context,
-                R.layout.program_information, playBills) {
+                R.layout.dialog_play_bill_lv_item, playBills) {
             @Override
             public void populate(ViewHolder viewHolder, PlayBill playBill) {
-                viewHolder.setTextView(R.id.program_information_tv_title, playBill.getTitle());
-                viewHolder.setTextView(R.id.program_information_lv_item_tv_count, "0");
+                viewHolder.setTextView(R.id.dialog_play_bill_lv_item_tv_title, playBill.getTitle());
                 if (playBill.isPlayIng()) {
-                    viewHolder.setImageResource(R.id.program_information_lv_item_img_sound_wave, R.drawable.playing);
-                    TextView tvTitle = viewHolder.getView(R.id.program_information_tv_title);
-                    tvTitle.setTextColor(Color.parseColor("#00FFFF"));
+                    viewHolder.setImageResource(R.id.dialog_play_bill_lv_item_img_play, R.drawable.playing);
+                    TextView tvTitle = viewHolder.getView(R.id.dialog_play_bill_lv_item_tv_title);
+                    tvTitle.setTextColor(Color.parseColor("#000000"));
                 } else {
-                    viewHolder.setImageResource(R.id.program_information_lv_item_img_sound_wave, R.drawable.sound_wave);
-                    TextView tvTitle = viewHolder.getView(R.id.program_information_tv_title);
+                    viewHolder.setImageResource(R.id.dialog_play_bill_lv_item_img_play, R.drawable.sound_wave);
+                    TextView tvTitle = viewHolder.getView(R.id.dialog_play_bill_lv_item_tv_title);
                     tvTitle.setTextColor(Color.parseColor("#000000"));
                 }
-                String broadcasters = "";
-                for (Announcer broadcaster : playBill.getBroadcasters()) {
-                    broadcasters = broadcasters.concat(broadcaster.getUsername()).concat("、");
-                }
-                viewHolder.setTextView(R.id.program_information_tv_broadcasters,
-                        broadcasters.length() > 0 ? broadcasters.substring(0, broadcasters.length() - 1) : "");
-                viewHolder.setTextView(R.id.program_information_tv_time,
+                String announcers = "";
+                viewHolder.setTextView(R.id.dialog_play_bill_lv_item_tv_broadcasters,
+                        announcers.length() > 0 ? announcers.substring(0,
+                                announcers.length() - 1) : "暂无主持人信息");
+                viewHolder.setTextView(R.id.dialog_play_bill_lv_item_tv_time,
                         playBill.getStart_time() + "-" + playBill.getEnd_time());
             }
 
@@ -150,9 +179,60 @@ public class ViewUtils {
                 return false;
             }
         };
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    if (DateTimeUtils.playIf(playBills.get(position).getStart_time())) {
+                        ImageView imageView = view.findViewById(R.id.dialog_play_bill_lv_item_iv_pl);
+                        imageView.setImageResource(R.drawable.play);
+                        if (context instanceof MainActivity) {
+                            FindFragment fragment = FindFragment.newInstance(playBills, urls, position, radioHint);
+                            ((MainActivity) context).showPlay(fragment);
+                            hide();
+                        }
+                    } else {
+                        Toast.makeText(context, "当前节目未开始！", Toast.LENGTH_LONG).show();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         listView.setAdapter(playBillAdapter);
         dialog.setContentView(view);
         dialog.show();
+    }
+
+    private static void updateData(List<PlayBill> playBillList) {
+        playBills.clear();
+        playBills.addAll(playBillList);
+        urls.clear();
+        for (PlayBill playBill : playBills) {
+            if (playBill.isPlayIng()) {
+                urls.add(ApiConstants.getPlayimjUrl(playBill.getChannel_id()));
+            } else {
+                urls.add(ApiConstants.getDemand(playBill.getChannel_id(),
+                        playBill.getStart_time(), playBill.getEnd_time()));
+            }
+        }
+    }
+
+    public static void show() {
+        dialog.show();
+    }
+
+    public static void hide() {
+        dialog.hide();
+    }
+
+    public static boolean isShowing() {
+        try {
+            return dialog.isShowing();
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 
     public static void dismissPlayBill() {
@@ -164,8 +244,7 @@ public class ViewUtils {
 
     public static void updatePlayBillAdapter(List<PlayBill> playBillList) {
         if (dialog != null && dialog.isShowing() && playBillAdapter != null) {
-            playBills.clear();
-            playBills.addAll(playBillList);
+            updateData(playBillList);
             playBillAdapter.notifyDataSetChanged();
         }
     }

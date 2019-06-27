@@ -23,7 +23,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="地区访问比例"
+                android:text="地区访问比例(单位:%)"
                 android:textStyle="bold" />
 
             <RadioGroup
@@ -39,7 +39,7 @@
                     android:text="当天" />
 
                 <RadioButton
-                    android:id="@+id/fragment_analyze_rb_hebdomadal"
+                    android:id="@+id/fragment_analyze_rb_hebdomad"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="过去一周" />

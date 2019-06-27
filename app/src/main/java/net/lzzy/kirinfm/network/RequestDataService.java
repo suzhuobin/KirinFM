@@ -8,9 +8,17 @@ import java.io.IOException;
  * @author Administrator
  */
 public class RequestDataService {
+    public static String getSeekRadio(String key) throws IOException {
+        return ApiService.okGet(ApiConstants.getSearchRadio(key));
+    }
+
     public static String getThisRegionRadio(int regionId, int page, int pagesize) throws IOException {
         String json = ApiService.okGet(ApiConstants.getRadio(regionId, page, pagesize));
         return json;
+    }
+
+    public static String getAdvertising() throws IOException {
+        return ApiService.okGet(ApiConstants.GET_ADVERTISING);
     }
 
     public static String getRadioPlayBill(int contentId, String day) throws IOException {
@@ -33,4 +41,7 @@ public class RequestDataService {
         return ApiService.okGet(ApiConstants.GET_DICTUM);
     }
 
+    public static String getRadioType(int categoryId) throws IOException {
+        return ApiService.okGet(ApiConstants.getRadioCategory(categoryId));
+    }
 }

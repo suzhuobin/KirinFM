@@ -1,11 +1,18 @@
 package net.lzzy.kirinfm.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
  * @author Administrator
  */
-public class Radio {
+public class Radio implements Parcelable {
     /**
      * content_id : 1756
      * content_type : channel
@@ -18,7 +25,6 @@ public class Radio {
      * update_time : 2017-11-08 17:00:30
      * categories : [{"id":429,"title":"交通台","pid":428}]
      */
-
     private int content_id;
     private String content_type;
     private String cover;
@@ -29,6 +35,33 @@ public class Radio {
     private String liveshow_id;
     private String update_time;
     private List<RadioCategory> categories;
+
+    public Radio() {
+    }
+
+    protected Radio(Parcel in) {
+        content_id = in.readInt();
+        content_type = in.readString();
+        cover = in.readString();
+        title = in.readString();
+        description = in.readString();
+        audience_count = in.readLong();
+        liveshow_id = in.readString();
+        update_time = in.readString();
+        categories = in.createTypedArrayList(RadioCategory.CREATOR);
+    }
+
+    public static final Creator<Radio> CREATOR = new Creator<Radio>() {
+        @Override
+        public Radio createFromParcel(Parcel in) {
+            return new Radio(in);
+        }
+
+        @Override
+        public Radio[] newArray(int size) {
+            return new Radio[size];
+        }
+    };
 
     public int getContent_id() {
         return content_id;
@@ -108,6 +141,24 @@ public class Radio {
 
     public void setCategories(List<RadioCategory> categories) {
         this.categories = categories;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(content_id);
+        dest.writeString(content_type);
+        dest.writeString(cover);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeLong(audience_count);
+        dest.writeString(liveshow_id);
+        dest.writeString(update_time);
+        dest.writeTypedList(categories);
     }
 
     public static class NowplayingBean {
@@ -200,5 +251,16 @@ public class Radio {
         public void setPid(int pid) {
             this.pid = pid;
         }
+    }
+    public String getCategoriesJson() throws JSONException {
+        JSONArray jsonArray=new JSONArray();
+        for (RadioCategory radioCategory:categories){
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("id",radioCategory.getId());
+            jsonObject.put("title",radioCategory.getTitle());
+            jsonObject.put("pid",radioCategory.getPid());
+            jsonArray.put(jsonObject);
+        }
+        return jsonArray.toString();
     }
 }
