@@ -41,8 +41,6 @@ public class FavoriteFragment extends BaseFragment {
             @Override
             public void populate(ViewHolder viewHolder, Radio radio) {
                 ImageView imageView = viewHolder.getView(R.id.fragment_fm_gv_item_img);
-                Picasso.get().load(radio.getCover())
-                        .into(imageView);
                 viewHolder.setTextView(R.id.fragment_favorite_item_tv_name, radio.getTitle());
                 viewHolder.setTextView(R.id.fragment_favorite_item_description, radio.getDescription());
                 viewHolder.setTextView(R.id.fragment_favorite_item_category, String.valueOf(radio.getCategories()));
