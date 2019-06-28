@@ -76,13 +76,6 @@
 
             android:layout_weight="1"
             android:background="@drawable/search_view" />
-
-        <TextView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/history" />
     </LinearLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
